@@ -1,0 +1,101 @@
+<div class="w3-bar w3-blue-grey">
+  <span (click)="setVariable('1')" class="w3-bar-item w3-button">Participant</span>
+  <span (click)="setVariable('2')" class="w3-bar-item w3-button">Organiser</span>
+  <span (click)="setVariable('3')" class="w3-bar-item w3-button">Speaker</span>
+  <span (click)="setVariable('4')" class="w3-bar-item w3-button">Sponser</span>
+</div>
+
+
+
+
+<h4 class="w3-panel w3-sand w3-xlarge w3-serif w3-khaki">My Events</h4>
+<ul class="w3-ul  w3-hoverable w3-center" style="width:50%">
+  <div *ngFor="let event of eventList" >
+  <li [routerLink]="['/dashboard/participant', event]">{{event}}<span onclick="this.parentElement.style.display='none'" 
+    class="w3-button w3-display-right">&times;</span></li>
+  </div>
+</ul>
+
+<div *ngIf="index==1 && waitingevent ">
+  <h4 class="w3-panel w3-sand w3-xlarge w3-serif w3-khaki">Waiting List Events </h4>
+  <ul class="w3-ul  w3-hoverable w3-center" style="width:80%">
+    <div *ngFor="let name of waitingevent" >
+    <li><p>{{name}}</p></li>
+    </div>
+  </ul>
+  </div>
+
+<div *ngIf="index==3 && eventnames">
+<h4 class="w3-panel w3-sand w3-xlarge w3-serif w3-khaki">Invitations</h4>
+<ul class="w3-ul  w3-hoverable w3-center" style="width:80%">
+  <div *ngFor="let name of eventnames" >
+  <li><span><p> You got an invitation to give a talk at {{name}} event</p><button class="w3-button w3-blue" (click)="requestAccepted()">Accept</button> <button class="w3-button w3-red" (click)="requestRejected()">Reject</button></span> </li>
+  </div>
+</ul>
+</div>
+
+<div *ngIf="index==3 && appliedevent">
+  <h4 class="w3-panel w3-sand w3-xlarge w3-serif w3-khaki">List of Events you want to part of</h4>
+  <ul class="w3-ul  w3-hoverable w3-center" style="width:80%">
+    <div *ngFor="let name of appliedevent" >
+    <li>{{name}}<span onclick="this.parentElement.style.display='none'" 
+      class="w3-button w3-display-right">&times;</span> </li>
+    </div>
+  </ul>
+  </div>
+
+<div *ngIf="index==2 && eventnames">
+  <h4 class="w3-panel w3-sand w3-xlarge w3-serif w3-khaki">Invitations</h4>
+  <ul class="w3-ul  w3-hoverable w3-center" style="width:80%">
+    <div *ngFor="let name of eventnames" >
+    <li><p> You got an invitation from the event organiser to assist at {{name}} event      </p><span><button class="w3-button w3-blue" (click)="requestAccepted()">Accept</button> <button class="w3-button w3-red" (click)="requestRejected()">Reject</button></span> </li>
+    </div>
+  </ul>
+  </div>
+
+  <div *ngIf="index==2 && createdevents">
+    <h4 class="w3-panel w3-sand w3-xlarge w3-serif w3-khaki">Events Created By you</h4>
+    <ul class="w3-ul  w3-hoverable w3-center" style="width:80%">
+      <div *ngFor="let name of createdevents" >
+      <li><p>  {{name}} </p><span onclick="this.parentElement.style.display='none'" 
+        class="w3-button w3-display-right">&times;></span> </li>
+      </div>
+    </ul>
+    </div>
+
+    <div *ngIf="index==2 && requestednames">
+        <h4 class="w3-panel w3-sand w3-xlarge w3-serif w3-khaki">Requests From Speakers</h4>
+        <ul class="w3-ul  w3-hoverable w3-center" style="width:80%">
+          <div *ngFor="let request of requestednames" >
+          <li><p>  {{request[0]}} is wants to be speaker for your event <br> Educational Details of {{request[0]}} is {{request[2]}} </p><span><button class="w3-button w3-blue" (click)="requestAcceptedFromOrgainzer(request[1])">Accept</button> <button class="w3-button w3-red" (click)="requestRejectedFromOrgainzer(request[1])">Reject</button></span> </li>
+          </div>
+        </ul>
+        </div>
+
+        <div *ngIf="index==2 && requestednames">
+            <h4 class="w3-panel w3-sand w3-xlarge w3-serif w3-khaki">Requests From Sponsor</h4>
+            <ul class="w3-ul  w3-hoverable w3-center" style="width:80%">
+              <div *ngFor="let request of requestednamessponser" >
+              <li><p>  {{request[0]}} is wants to be Sponser for your event <br>{{request[0]}} is the CEO {{request[2]}} </p><span><button class="w3-button w3-blue" (click)="requestAcceptedFromOrgainzer(request[1])">Accept</button> <button class="w3-button w3-red" (click)="requestRejectedFromOrgainzer(request[1])">Reject</button></span> </li>
+              </div>
+            </ul>
+            </div>   
+ 
+  <div *ngIf="index==4 && eventnames">
+    <h4 class="w3-panel w3-sand w3-xlarge w3-serif w3-khaki">Invitations</h4>
+    <ul class="w3-ul  w3-hoverable w3-center" style="width:80%">
+      <div *ngFor="let name of eventnames" >
+      <li><p> You got an request from the event organiser to sponser the {{name}} event      </p><span><button class="w3-button w3-blue" (click)="requestAccepted()">Accept</button> <button class="w3-button w3-red" (click)="requestRejected()">Reject</button></span> </li>
+      </div>
+    </ul>
+  </div>  
+
+  <div *ngIf="index==4 && AppliedforEvent">
+    <h4 class="w3-panel w3-sand w3-xlarge w3-serif w3-khaki">List of Events you want to part of</h4>
+    <ul class="w3-ul  w3-hoverable w3-center" style="width:80%">
+      <div *ngFor="let name of AppliedforEvent" >
+      <li>{{name}}<span onclick="this.parentElement.style.display='none'" 
+        class="w3-button w3-display-right">&times;</span> </li>
+      </div>
+    </ul>
+    </div>
