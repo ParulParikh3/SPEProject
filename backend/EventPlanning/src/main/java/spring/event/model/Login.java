@@ -31,10 +31,7 @@ public class Login {
 		
 	}
 	
-
-	
-
-	public long getUserid() {
+    public long getUserid() {
 		return userid;
 	}
 

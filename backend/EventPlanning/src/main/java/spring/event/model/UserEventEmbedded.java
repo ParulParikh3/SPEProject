@@ -1,13 +1,17 @@
 package spring.event.model;
+
+
 import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.*;
-
 @Embeddable
 public class UserEventEmbedded implements Serializable {
+	
+	private static final long serialVersionUID=2L;
 	@Column(name="userid")
 	private long userid;
+	
 	@Column(name="eventid")
 	private long eventid;
 	
@@ -26,7 +30,7 @@ public class UserEventEmbedded implements Serializable {
 	public UserEventEmbedded(long userid, long eventid) {
 		
 		this.userid = userid;
-		this.eventid =eventid;
+		this.eventid = eventid;
 	}
 	public UserEventEmbedded() {
 		
@@ -45,5 +49,4 @@ public class UserEventEmbedded implements Serializable {
 	    public int hashCode() {
 	        return Objects.hash(getUserid(), getEventid());
 	    }
-
 }

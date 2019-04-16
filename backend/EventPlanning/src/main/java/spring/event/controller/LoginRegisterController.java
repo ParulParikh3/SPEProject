@@ -1,16 +1,8 @@
 package spring.event.controller;
 
-import java.awt.PageAttributes.MediaType;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,15 +20,15 @@ import spring.event.repository.RegistrationRepository;
 @CrossOrigin(origins="http://localhost:4200",allowedHeaders="*")
 public class LoginRegisterController {
 	@Autowired
-	private LoginRepository repo;
+	private LoginRepository loginrepository;
 	@Autowired
-	private RegistrationRepository reg;
+	private RegistrationRepository registrationrepository;
   
 @PostMapping(path="/login")
 @ResponseBody
 public long validate(@RequestBody Login login)
 {
-	Login log=repo.findByUsername(login.getUsername());
+	Login log=loginrepository.findByUsername(login.getUsername());
 	if(log!=null)
 	{
 		if(log.getPass().equals(login.getPass()))
@@ -59,16 +51,16 @@ public long validate(@RequestBody Login login)
 
 public String add(@RequestBody LoginUserWrapper luw )
 {
-	if(repo.findByUsername(luw.getLogin().getUsername())!=null)
+	if(loginrepository.findByUsername(luw.getLogin().getUsername())!=null)
 		return "username already exist";
 	
-	reg.save(luw.getUser());
-	Users us=reg.findByEmail(luw.getUser().getEmail());
+	registrationrepository.save(luw.getUser());
+	Users us=registrationrepository.findByEmail(luw.getUser().getEmail());
 	Login lg=new Login();
 	lg.setUsername(luw.getLogin().getUsername());
 	lg.setPass(luw.getLogin().getPass());
 	lg.setUserid(us.getUserid());
-	repo.save(lg);
+	loginrepository.save(lg);
 	return "Registration successful";
 }
 

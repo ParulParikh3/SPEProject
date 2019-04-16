@@ -25,70 +25,74 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import spring.event.model.OptionalDetails;
+
 import spring.event.model.Review;
 import spring.event.model.ReviewParser;
 import spring.event.model.Review_SuggestionParser;
-import spring.event.model.UserEvent;
 import spring.event.model.UserEventEmbedded;
-import spring.event.model.User_EventLink;
 import spring.event.repository.ReviewRepository;
 
 @RestController
 @RequestMapping("/")
-@CrossOrigin(origins="http://localhost:4200",allowedHeaders="*")
+@CrossOrigin(origins="http://localhost:4200",allowedHeaders="*",exposedHeaders="Access-Control-Allow-Origin")
 public class ReviewController {
 	
 	private static final String success= "successful";
 	private static final String failure= "not possible";
 	
 	@Autowired
-	private ReviewRepository reviewrepo;
+	private ReviewRepository reviewrepository;
 	
 	@PostMapping("/checkReview")
 	public String CheckExistingReview(@RequestBody UserEventEmbedded usereventid){
-					
-		if(reviewrepo.findReviewByUsereventid(usereventid)!=null) {
 		
+		
+		if(reviewrepository.findReviewByUsereventid(usereventid)!=null) {
 			return failure;
 		}
 		else {
-			
 			return success;
 		}
 	}
 	
+	
+	/*------------------authorization before setting the review---------------------------*/
+	
 	@PostMapping(value="setReview", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> setReviewforEvent(@RequestBody String userreview) throws JsonParseException, JsonMappingException, IOException {
+		System.out.println(userreview);
+		
 		ReviewParser reviewevent = new ObjectMapper().readValue(userreview,ReviewParser.class);
+
 		UserEventEmbedded usereventid = new UserEventEmbedded();
 		usereventid.setUserid(reviewevent.getUserid());
 		usereventid.setEventid(reviewevent.getEventid());
-			
-			
-		Review reviews = new Review(usereventid,reviewevent.getReview(),reviewevent.getSuggestion());
-		reviewrepo.save(reviews);
 		
-
-		return new ResponseEntity<>(success,HttpStatus.OK); 
+		if(reviewrepository.findReviewByUsereventid(usereventid)!=null) {
+			return new ResponseEntity<>(failure,HttpStatus.OK);
+		}
+		else {
+			
+			Review reviews = new Review(usereventid,reviewevent.getReview(),reviewevent.getSuggestion());
+			reviewrepository.save(reviews);
+		
+			return new ResponseEntity<>(success,HttpStatus.OK); 
+		}
 	}
 	
 	@PostMapping("/getReview")
 	@ResponseBody
 	public ResponseEntity<List<Review_SuggestionParser>> getReview(@RequestBody UserEventEmbedded usereventid){
 		
-	
-		
-		List<Review_SuggestionParser> reviews = reviewrepo.getReviewsByUsereventid(usereventid.getEventid());
-
+		List<Review_SuggestionParser> reviews = reviewrepository.getReviewsByUsereventid(usereventid.getEventid());
 		return new ResponseEntity<>(reviews,HttpStatus.OK);
 	}
 	
 	@PostMapping("/getSuggestion")
 	@ResponseBody
 	public ResponseEntity<List<Review_SuggestionParser>> getSuggestion(@RequestBody UserEventEmbedded usereventid){
-				
-		List<Review_SuggestionParser> suggestions = reviewrepo.getSuggestionsByUsereventid(usereventid.getEventid());
+		
+		List<Review_SuggestionParser> suggestions = reviewrepository.getSuggestionsByUsereventid(usereventid.getEventid());
 		return new ResponseEntity<>(suggestions,HttpStatus.OK);
 	}
 	

@@ -1,13 +1,11 @@
 package spring.event.controller;
 
-import java.util.Map;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +18,6 @@ import spring.event.model.UserEventEmbedded;
 import spring.event.model.User_EventLink;
 import spring.event.model.Waiting_List;
 import spring.event.repository.EventRepository;
-//import spring.event.repository.ParticipantRepo;
 import spring.event.repository.User_EventLinkRepository;
 import spring.event.repository.WaitingListRepository;
 
@@ -58,7 +55,15 @@ public class ParticipantController {
 		
 		
 		if(usereventrepository.findByUsereventid(usereventid)!=null) //if userid and eventid present  in user_eventlink table
-			return "already registered";
+		{
+			User_EventLink user=usereventrepository.findByUsereventid(usereventid);
+			if(user.getRole()=="participant")
+			return "already registered for this event";
+			
+			else
+				return "You can't register as a participant beacause you are "+user.getRole()+" for this event";
+			
+		}
 		
 		else
 		{
@@ -100,7 +105,7 @@ public class ParticipantController {
 		Event event=eventrepository.findByEventid(id.getEventid());
 		if(userevent!=null && userevent.getStatus().equals("approved")) 
 		{
-			usereventrepository.delete(id); // delete entry from user_eventlink table
+			usereventrepository.deleteById(id); // delete entry from user_eventlink table
 		   if(event.getWaiting_count()!=0)    // case where there are participants in waiting list
 		   {
 			   int wait_count=event.getWaiting_count()-1;  //update wait_count in event table since on waiting list participant get approved
@@ -118,7 +123,7 @@ public class ParticipantController {
 			   new_participant.setStatus("approved");
 			   usereventrepository.save(new_participant);
 			   waitingrepository.delete(wl); // delete that userid from waitingList table since it is approved now
-			   return "withdrawn successfully and new participantadded";
+			   return "withdrawn successfully";
 			   
 			   // in this case there is no need to update participant_registered beacuse new participant is adding here
 		   }
@@ -128,18 +133,18 @@ public class ParticipantController {
 				int registeredcount=event.getParticipant_registered()-1;  //update participant_registered 
 				event.setParticipant_registered(registeredcount);
 				eventrepository.save(event);
-				return "withdrawn successfully and no new participant added";
+				return "withdrawn successfully";
 		}
 		   }
 		
 		else if(userevent!=null && userevent.getStatus().equals("waiting"))
 		{
-			usereventrepository.delete(id);  // deleting entry fron user_eventlink table 
+			usereventrepository.deleteById(id);  // deleting entry fron user_eventlink table 
 			Waiting_List waitlist=waitingrepository.findByUserandEventid(id.getUserid(),id.getEventid());
-			waitingrepository.delete(waitlist.getWaiting_id()); // deleting entry from waiting_list also
+			waitingrepository.deleteById(waitlist.getWaiting_id()); // deleting entry from waiting_list also
 			event.setWaiting_count(event.getWaiting_count()-1); // updating waiting_count in event table
 			eventrepository.save(event);
-		return "withdrawn successfull and remove from waiting list";
+		return "withdrawn successfully";
 		}
 		
 		else

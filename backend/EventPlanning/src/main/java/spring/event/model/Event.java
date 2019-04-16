@@ -4,12 +4,15 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="event")
-public class Event {
+public class Event implements Comparable<Event> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="eventid")
 	private long eventid;
+	
+	@Column(name="organizer_id")
+	private long organizer_id;
 	
 	@Column(name="eventname")
 	private String eventname;
@@ -29,25 +32,61 @@ public class Event {
 	@Column(name="eventlocation")
 	private String eventlocation;
 	
-	@Column(name="register_fee")
-	private int register_fee;
-	
-	
-	@Column(name="phase")
-	private String phase;
-	
 	@Column(name="waiting_count")
 	private int waiting_count;
 	
-	@Column(name="organizer_id")
-	private long organizer_id;
-	
-	@Column(name="last_date")
-	private String last_date;
+	@Column(name="register_fee")
+	private int register_fee;
+
+	@Column(name="phase")
+	private String phase;
 	
 	@Column(name="eventtype")
 	private String eventtype;
 	
+	@Column(name="last_date")
+	private String last_date;
+	
+	
+	
+	
+	public String getLast_date() {
+		return last_date;
+	}
+
+	public void setLast_date(String last_date) {
+		this.last_date = last_date;
+	}
+
+	public Event( String eventname, String eventdate, String description, int participantcount,
+			String eventlocation, int register_fee, String phase,
+			long organizer_id, String last_date, String eventtype) {
+		super();
+		
+		this.eventname = eventname;
+		this.eventdate = eventdate;
+		this.description = description;
+		this.participantcount = participantcount;
+		
+		this.eventlocation = eventlocation;
+		this.register_fee = register_fee;
+		this.phase = phase;;
+		this.organizer_id = organizer_id;
+		this.last_date = last_date;
+		this.eventtype = eventtype;
+	}
+	
+	public int getWaiting_count() {
+		return waiting_count;
+	}
+
+	public void setWaiting_count(int waiting_count) {
+		this.waiting_count = waiting_count;
+	}
+	
+	
+
+
 
 
 	public String getEventtype() {
@@ -64,12 +103,12 @@ public class Event {
 
 
 
-	public void setEventid(long eventid) {
-		this.eventid = eventid;
+	public long getEventid() {
+		return eventid;
 	}
 
 
-
+	
 
 	public long getOrganizer_id() {
 		return organizer_id;
@@ -83,45 +122,12 @@ public class Event {
 	}
 
 
-
-
-
-
-
-	public String getLast_date() {
-		return last_date;
+	public void setEventid(long eventid) {
+		this.eventid = eventid;
 	}
 
 
 
-
-	public void setLast_date(String last_date) {
-		this.last_date = last_date;
-	}
-
-
-
-
-	public int getWaiting_count() {
-		return waiting_count;
-	}
-
-
-
-
-	public void setWaiting_count(int waiting_count) {
-		this.waiting_count = waiting_count;
-	}
-
-
-
-
-	public long getEventid() {
-		return eventid;
-	}
-
-
-	
 
 	public String getEventname() {
 		return eventname;
@@ -163,13 +169,6 @@ public class Event {
 	}
 
 
-	public Event() {
-		super();
-	}
-
-
-
-
 	public int getParticipant_registered() {
 		return participant_registered;
 	}
@@ -209,38 +208,26 @@ public class Event {
 		this.phase = phase;
 	}
 
-	public Event( String eventname, String eventdate, String description, int participantcount,
-			String eventlocation, int register_fee, String phase,
-			long organizer_id, String last_date, String eventtype) {
-		super();
+ public Event() {
 		
-		this.eventname = eventname;
-		this.eventdate = eventdate;
-		this.description = description;
-		this.participantcount = participantcount;
-		
-		this.eventlocation = eventlocation;
-		this.register_fee = register_fee;
-		this.phase = phase;
-		
-		this.organizer_id = organizer_id;
-		this.last_date = last_date;
-		this.eventtype = eventtype;
 	}
 
 
-
-
-
-@Override
-public String toString() {
-	return "Event [eventid=" + eventid + ", eventname=" + eventname + ", eventdate=" + eventdate + ", description="
-			+ description + ", participantcount=" + participantcount + ", participant_registered="
-			+ participant_registered + ", eventlocation=" + eventlocation + ", register_fee=" + register_fee
-			+ ", phase=" + phase + ", waiting_count=" + waiting_count + "]";
-}
-
-
+	@Override
+	public String toString() {
+		return "Event [eventid=" + eventid + ", eventname=" + eventname + ", eventdate=" + eventdate + ", description="
+				+ description + ", participantcount=" + participantcount + ", participant_registered="
+				+ participant_registered + ", eventlocation=" + eventlocation + ", register_fee=" + register_fee
+				+ ", phase=" + phase + "]";
+	}
+	
+	@Override
+	  public int compareTo(Event u) {
+	    if (getEventname() == null || u.getEventname() == null) {
+	      return 0;
+	    }
+	    return getEventname().compareTo(u.getEventname());
+	  }
 	
 
 	

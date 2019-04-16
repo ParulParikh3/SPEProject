@@ -28,5 +28,8 @@ public interface User_EventLinkRepository extends CrudRepository<User_EventLink,
 
 	@Query(value="select users.name,users.userid,optionaldetails.educational_details from users inner join user_eventlink on user_eventlink.userid=users.userid inner join optionaldetails ON optionaldetails.userid=users.userid  where user_eventlink.role='sponsor' and user_eventlink.status='applied' and user_eventlink.eventid=(select eventid from user_eventlink where userid=?1 and role='organizer')" , nativeQuery=true)
 	List<Object[]> requestsFromSponsor(long id);
+	
+	@Query(value="select users.name,users.userid from users where users.userid=(select user_eventlink.userid from user_eventlink where status='applied' and role='organizer' and eventid=(select eventid from event where organizer_id=?1))",nativeQuery=true)
+	List<Object> findByOrganizerRequest(long id);
 
 }

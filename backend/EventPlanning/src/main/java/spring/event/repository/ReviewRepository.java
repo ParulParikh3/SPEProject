@@ -5,12 +5,11 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import spring.event.model.EventParser;
 import spring.event.model.Review;
 import spring.event.model.Review_SuggestionParser;
 import spring.event.model.UserEventEmbedded;
 
-public interface ReviewRepository extends CrudRepository<Review,Integer> {
+public interface ReviewRepository extends CrudRepository<Review,Long> {
 
 	Review findReviewByUsereventid(UserEventEmbedded usereventid);
 	

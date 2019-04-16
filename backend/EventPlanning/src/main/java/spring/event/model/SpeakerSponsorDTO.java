@@ -1,7 +1,6 @@
 package spring.event.model;
-import java.io.Serializable;
 
-public class SpeakerSponsorDTO implements Serializable {
+public class SpeakerSponsorDTO {
 
 	private String role;
 	private String name;
@@ -11,15 +10,11 @@ public class SpeakerSponsorDTO implements Serializable {
 	public String getName() {
 		return name;
 	}
-	
-	public SpeakerSponsorDTO()
-	{}
-	
 	public SpeakerSponsorDTO(String role, String name) {
 		super();
 		this.role = role;
 		this.name = name;
 	}
-	
-	
 }
+	
+	

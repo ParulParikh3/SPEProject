@@ -1,6 +1,6 @@
 package spring.event.model;
 
-public class EventParser {
+public class EventParser  implements Comparable<EventParser>  {
 	
 	private long eventid;
 	private String eventname;
@@ -27,5 +27,13 @@ public class EventParser {
 	public void setEventname(String eventname) {
 		this.eventname = eventname;
 	}
+	
+	@Override
+	  public int compareTo(EventParser u) {
+	    if (getEventname() == null || u.getEventname() == null) {
+	      return 0;
+	    }
+	    return getEventname().compareTo(u.getEventname());
+	  }
 
 }

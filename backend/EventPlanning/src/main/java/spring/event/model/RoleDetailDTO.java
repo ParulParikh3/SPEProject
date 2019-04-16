@@ -1,26 +1,16 @@
 package spring.event.model;
-import java.io.Serializable;
-public class RoleDetailDTO implements Serializable{
+
+public class RoleDetailDTO implements Comparable<RoleDetailDTO >{
 
 	private long userid;
-	private String name;
-	private String email;
-	private String educational_details;
-	private String resume;
-	private String linkedin;
-
-	
-	public String getEducational_details() {
-		return educational_details;
-	}
-	public void setEducational_details(String educational_details) {
-		this.educational_details = educational_details;
-	}
-	public void setResume(String resume) {
-		this.resume = resume;
-	}
-	public void setLinkedin(String linkedin) {
-		this.linkedin = linkedin;
+	public RoleDetailDTO(long userid, String name, String email,String education,String linkedin,String resume) {
+		super();
+		this.userid = userid;
+		this.name = name;
+		this.email = email;
+		this.education=education;
+		this.resume=resume;
+		this.linkedin=linkedin;
 	}
 	public long getUserid() {
 		return userid;
@@ -36,9 +26,14 @@ public class RoleDetailDTO implements Serializable{
 		return email;
 	}
 	public String getEducation() {
-		return educational_details;
+		return education;
 	}
-		
+	private String name;
+	private String email;
+	private String education;
+	private String resume;
+	private String linkedin;
+	
 	public String getLinkedin() {
 		return linkedin;
 	}
@@ -51,21 +46,13 @@ public class RoleDetailDTO implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	public RoleDetailDTO()
-	{
-		
-	}
-	
-	public RoleDetailDTO(long userid, String name, String email,String educational_details,String linkedin,String resume) {
-		super();
-		this.userid = userid;
-		this.name = name;
-		this.email = email;
-		this.educational_details=educational_details;
-		this.resume=resume;
-		this.linkedin=linkedin;
-	}
+	@Override
+	  public int compareTo(RoleDetailDTO u) {
+	    if (getName() == null || u.getName() == null) {
+	      return 0;
+	    }
+	    return getName().compareTo(u.getName());
+	  }
 	
 	
 }
