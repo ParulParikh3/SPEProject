@@ -1,6 +1,8 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import {LoginService} from './login-form/login.servie';
 import {Routes ,RouterModule} from '@angular/router';
 import { AppComponent } from './app.component';
@@ -8,7 +10,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import {DashBoardComponent} from './dash-board/dash-board.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { RegisterFormComponent } from './register-form/register-form.component';
-import {RegisterFormService} from './register-form.service';
+import {RegisterFormService} from './register-form/register-form.service';
 import { EventListComponent } from './event-list/event-list.component';
 import {ParentRoutingModule} from './parent-routing.module';
 import { ToastrModule } from 'ngx-toastr';
@@ -28,9 +30,13 @@ import { UndercreationEventDetailsComponent } from './undercreation-event-detail
 import {UndercreationeventService} from './undercreation-event-details/undercreationevent.service';
 import {DashboardService} from './dash-board/dashboard.service';
 import { SpeakerSponsor1Component } from './speaker-sponsor1/speaker-sponsor1.component';
+import { SpeakereventDescriptionComponent } from './speakerevent-description/speakerevent-description.component';
+import { SpeakerSponsor1Service } from './speaker-sponsor1/speaker-sponsor1.service';
+import { SpeakereventDescriptionService } from './speakerevent-description/speakerevent-description.service';
+import { ReviewsComponent } from './reviews/reviews.component';
+import {ReviewsService } from './reviews/reviews.service';
 import { SpeakersSponsorsListComponent } from './speakers-sponsors-list/speakers-sponsors-list.component';
-import {SpeakerSponsorService} from './speakers-sponsors-list/speaker-sponsor.service';
-
+import { SpeakerSponsorService } from './speakers-sponsors-list/speaker-sponsor.service';
 const appRoutes :Routes=[
   {
     path:'',
@@ -68,12 +74,15 @@ const appRoutes :Routes=[
     EventCreationFormComponent,
     UndercreationEventDetailsComponent,
     SpeakerSponsor1Component,
+    SpeakereventDescriptionComponent,
+    ReviewsComponent,
     SpeakersSponsorsListComponent,
     
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     ParentRoutingModule,
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule,
@@ -94,8 +103,12 @@ const appRoutes :Routes=[
     OrganizerService,
     DatePipe,
     DashboardService,
+    UndercreationeventService,
+    SpeakerSponsor1Service,
+    SpeakereventDescriptionService,
+    ReviewsService,
     SpeakerSponsorService,
-    UndercreationeventService],
-  bootstrap: [AppComponent]
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

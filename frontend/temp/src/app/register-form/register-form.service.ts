@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from "@angular/http";
-import {Register} from './register';
-import {Login} from './login';
+import {Register} from '../register';
+import {Login} from '../login';
 import 'rxjs/add/operator/map';
 @Injectable()
 export class RegisterFormService {

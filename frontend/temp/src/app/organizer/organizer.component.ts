@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrganizerService } from './organizer.service';
-import { EventCreation } from '../event-creation-form/eventcreation';
+import { EventCreation} from '../event-creation-form/eventcreation';
 
 @Component({
   selector: 'app-organizer',
@@ -9,8 +9,8 @@ import { EventCreation } from '../event-creation-form/eventcreation';
 })
 export class OrganizerComponent implements OnInit {
 
-  id:number;
   creation_phase_events:EventCreation[]=[];
+  id:number;
   constructor(private organizerservice:OrganizerService) { }
 
   ngOnInit() {

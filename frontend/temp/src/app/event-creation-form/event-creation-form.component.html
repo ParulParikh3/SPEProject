@@ -21,7 +21,7 @@
       <label for="event_date">
      <b>Event-Date:</b>
       </label>
-      <input type="date" 
+      <input type="date" min={{date}} 
       formControlName="event_date" 
       class="form-control">
       </div>
@@ -90,7 +90,7 @@
       <label for="lastdate">
       <b>  Last Date for Registration:</b>
       </label>
-      <input type="date" 
+      <input type="date" min={{date}}
       formControlName="lastdate" 
       class="form-control">
       </div>
@@ -123,6 +123,6 @@
           <input type="radio" value="single" formControlName="eventtype" style="color:black" ngModel> Single-Organizer
           </div>
           <br>
-          <button type="submit" name="button" [disabled]="eventcreation.invalid" class="btn btn-success">Submit</button>
+          <button type="submit" name="button" [disabled]="eventcreation.invalid" class="btn btn-success w3-blue-gray">Submit</button>
           
-</form> 
+</form>

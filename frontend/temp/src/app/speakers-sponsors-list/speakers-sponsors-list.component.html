@@ -19,10 +19,12 @@
        <br>
       <b> Additional Details </b> : {{speaker.education}}
       <br>
+      <b>Resume</b> : <button type="button" (click)="download(speaker.resume)">{{speaker.resume}}</button>
+      <br>
       <b> Linkedin Profile</b> : <a href="{{speaker.linkedin}}">{{speaker.linkedin}}</a>
      
       <br>
-        <button type="button" class="btn btn-success" (click)="toSpeaker(speaker.userid)">Send Request</button>
+        <button type="button" class="btn btn-success w3-blue-gray" (click)="toSpeaker(speaker.userid)">Send Request</button>
       </div>
     </div>
   </div>
@@ -47,12 +49,14 @@
        <br>
       <b> Additional Details </b> : {{sponsor.education}}
       <br>
+      <b>Resume</b> : <button type="button" (click)="download(sponsor.resume)">{{sponsor.resume}}</button>
       <br>
       <b> Linkedin Profile</b> : <a href="{{sponsor.linkedin}}">{{sponsor.linkedin}}</a>
      
       <br>
+
       <br>
-        <button type="button" class="btn btn-success" (click)="toSponsor(sponsor.userid)">Send Request</button>
+        <button type="button" class="btn btn-success w3-blue-gray" (click)="toSponsor(sponsor.userid)">Send Request</button>
       </div>
     </div>
   </div>

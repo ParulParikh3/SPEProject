@@ -36,6 +36,9 @@ export class LoginFormComponent implements OnInit {
                           sessionStorage.setItem('username',this.loginUser.username);
                           this.router.navigateByUrl('/dashboard/eventlist')
                           this.toastr.success('Success', "Logged In Successfully");}
+                          else{
+                            this.toastr.error('Incorrect username or password', "Logged In Failed");
+                          }
                         },
         (error) =>console.log(error)
       );

@@ -36,14 +36,14 @@
 <br>
   <div *ngIf="sendstatus;else elseBlock">
     
-  Send Request to Organizer:  <button type="button" [disabled]="typeoforganizer"class="w3-button w3-round w3-green" (click)="toOrganizer()" >Send</button>
+  Send Request to Organizer:  <button type="button" [disabled]="typeoforganizer"class="w3-button w3-round w3-blue-gray" (click)="toOrganizer()" >Send</button>
   
   </div>
   <ng-template #elseBlock>
     <div>
-      Send Request to Speaker/Sponsors:  <button type="button" class="w3-button w3-round w3-green" [routerLink]="['/dashboard/request',event_id]" >Send</button>
+      Send Request to Speaker/Sponsors:  <button type="button" class="w3-button w3-round w3-blue-gray" [routerLink]="['/dashboard/request',event_id]" >Send</button>
      <pre></pre>
-     Open Event for Participant: <button type="button" class="w3-button w3-round w3-green" (click)="update(event_id)">Update Phase</button>
+     Open Event for Participant: <button type="button" class="w3-button w3-round w3-blue-gray" (click)="update(event_id)">Update Phase</button>
     </div>
   </ng-template>
 

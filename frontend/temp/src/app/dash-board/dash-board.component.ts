@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Routes ,Router} from '@angular/router';
-import {DashboardService} from './dashboard.service';
+import { ToastrService } from 'ngx-toastr';
 import { AuthServiceService } from '../auth-service.service';
+import {DashboardService} from './dashboard.service';
 
 
 @Component({
@@ -11,10 +12,11 @@ import { AuthServiceService } from '../auth-service.service';
 })
 export class DashBoardComponent implements OnInit {
   active:string;
-  eventnames=[]; 
   userid=sessionStorage.getItem("userid");
   username= sessionStorage.getItem("username");
-  constructor(private router: Router, private authGuard:AuthServiceService, private dashboardservice:DashboardService) {
+  eventnames=[];
+  
+  constructor(private router: Router, private authGuard:AuthServiceService,private dashboardservice:DashboardService) {
     this.router.events.subscribe((val) => {
       this.routeChanged(val);
     });
@@ -27,14 +29,10 @@ export class DashBoardComponent implements OnInit {
            this.eventnames=notification;
       },
       (error) =>console.log(error)
-    );  
-
+    );
   }
   routeChanged(val){
     this.active = val.url;
-  }
-  logOut(){
-    this.authGuard.logout();
   }
 
   myFunction()
@@ -46,5 +44,8 @@ export class DashBoardComponent implements OnInit {
       } else { 
         x.className = x.className.replace(" w3-show", "");
       }
+  }
+  logOut(){
+    this.authGuard.logout();
   }
 }
