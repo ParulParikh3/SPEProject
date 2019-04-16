@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class UndercreationeventService {
 
-  private baseUrl:string ='http://localhost:3000/event'
+  private baseUrl:string ='http://localhost:3000'
   constructor(private http:Http) { }
  
   
@@ -16,15 +16,9 @@ export class UndercreationeventService {
         .map((res: Response) => res.json());
 
   }
+
+  
  
-  organizerDetails(organizer_id:number)
-  {
-    const headers = new Headers({'Content-Type': 'text/plain'});
-         return this.http.get(this.baseUrl+'/organizerDetail?organizer='+organizer_id,{headers: headers})
-        .map((res: Response) => res.json());
-  }
-
-
   organizerEvent(id:number,eid:number)
   {
     const headers = new Headers({'Content-Type': 'text/plain'});
@@ -41,6 +35,5 @@ export class UndercreationeventService {
         .map((res: Response) => res.text());
 
 }
-
 
 }

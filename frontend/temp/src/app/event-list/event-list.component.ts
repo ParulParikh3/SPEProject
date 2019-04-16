@@ -21,7 +21,6 @@ export class EventListComponent implements OnInit {
     .subscribe(
       (eventList) =>{
         this.eventList=eventList;
-        console.log(eventList);
       },
       (error) =>console.log(error)
     );

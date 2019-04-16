@@ -2,14 +2,13 @@ import { Injectable } from "@angular/core";
 import { Headers, Http,Response } from "@angular/http";
 import {Login} from '../login';
 import 'rxjs/add/operator/map';
-import { variable } from "@angular/compiler/src/output/output_ast";
 
 @Injectable()
 export class LoginService{
     private baseUrl:string ='http://localhost:3000';
     
     constructor(private http:Http){}
-    
+
 
     checklogin(login : Login)
     {
@@ -18,5 +17,4 @@ export class LoginService{
         .map((res: Response) => res.text());
     }
 
-    
   }

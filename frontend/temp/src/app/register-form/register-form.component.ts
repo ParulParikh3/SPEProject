@@ -3,8 +3,8 @@ import {Login} from '../login';
 import {Register} from '../register';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
-import {RegisterFormService} from '../register-form.service';
-
+import {RegisterFormService} from './register-form.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register-form',
@@ -15,10 +15,10 @@ export class RegisterFormComponent implements OnInit {
     form: FormGroup;
   loginUser: Login= {} as any;
   registerUser: Register= {} as any;
-  constructor(private router: Router,
-    private ser1: RegisterFormService) { }
+  constructor(private router: Router, private toastr :ToastrService, private ser1: RegisterFormService) { }
     private gender: string[];
-  ngOnInit() {
+  
+    ngOnInit() {
     this.gender = ['Male', 'Female', 'Others'];
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
@@ -37,12 +37,12 @@ export class RegisterFormComponent implements OnInit {
     
     this.loginUser = {username: this.form.get('username').value, pass: this.form.get('password').value}
 
-    console.log(this.registerUser.name);
       this.ser1.create(this.loginUser, this.registerUser)
       .subscribe(
-        (response) => { console.log(response)
+        (response) => { 
                         if  (response === "Registration successful") {
-                       this.router.navigateByUrl('/')
+                          this.toastr.success('Success', "Registration Successful");
+                          this.router.navigateByUrl('/')
                     }
                         },
         (error) => console.log(error)

@@ -22,10 +22,10 @@ export class SpeakersSponsorsListComponent implements OnInit {
    })
 
   
-   this.role.displaySpeaker().subscribe((response)=>{
+   this.role.displaySpeaker(this.event_id).subscribe((response)=>{
      this.speakerDetail=response
    })
-   this.role.displaySponsor().subscribe((response)=>{
+   this.role.displaySponsor(this.event_id).subscribe((response)=>{
     this.sponsorDetail=response
   })
   }
@@ -34,8 +34,10 @@ export class SpeakersSponsorsListComponent implements OnInit {
  {
 
   this.role.sendToSpeaker(speakerid,this.event_id).subscribe(
-    (response)=>{
-      this.toastr.success('Success', response);
+    (response)=>{if(response=="success")
+    this.toastr.success('Success',"request send successfully");
+    else
+    this.toastr.error('Failed',response);
       
     }
   )
@@ -44,15 +46,34 @@ export class SpeakersSponsorsListComponent implements OnInit {
  toSponsor(sponsorid:number)
  {
  this.role.sendToSponsor(sponsorid,this.event_id).subscribe(
-  (response)=>{
-    this.toastr.success('Success', response);
+  (response)=>{if(response=="success")
+  this.toastr.success('Success',"request send successfully");
+  else
+  this.toastr.error('Failed',response);
     
-  }
-)
+  })
 
-}
+ }
 
- 
-  
+ download(filename:String)
+ {
+   this.role.downloadFile(filename)
+   .subscribe((res)=>{
+    var url = window.URL.createObjectURL(res.data);
+    var a = document.createElement('a');
+    document.body.appendChild(a);
+    a.setAttribute('style', 'display: none');
+    a.href = url;
+    a.download = res.fileName;
+    a.click();
+    window.URL.revokeObjectURL(url);
+    a.remove(); // remove the element
+  }, error => {
+    console.log('download error:', JSON.stringify(error));
+  }, () => {
+    console.log('Completed file download.')
+  });
+     
+ }
 
 }

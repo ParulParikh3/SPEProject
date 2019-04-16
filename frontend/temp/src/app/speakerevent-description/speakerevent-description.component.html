@@ -1,4 +1,19 @@
-<button type="button" style="margin-left: 43%" color="primary" class="w3-panel  w3-blue-gray w3-serif" [disabled]="check" (click)="openModalDialog()">Enroll as a speaker/sponsor</button>
+<div class="w3-container">
+  <div class="w3-panel w3-sand w3-xlarge w3-serif w3-khaki">
+    <h3>Event Description</h3></div>
+    <table class = "table" align="center" border="1">
+    <tr><th>Event-Name:</th><td>{{eventdetails?.eventname}}</td></tr>
+    <tr><th>Event-Date:</th><td>{{eventdetails?.eventdate}}</td></tr>
+    <tr><th>Description:</th><td>{{eventdetails?.description}}</td></tr>
+    <tr><th>Event-location:</th><td>{{eventdetails?.eventlocation}}</td></tr>
+    <tr><th>Registration-Fee:</th><td>{{eventdetails?.register_fee}}</td></tr>
+    </table>
+  
+  <!--<button type="button" id="role" class="btn btn-lg btn-outline-primary" (click)="selectrole()">Select a Role</button>-->
+</div>
+
+<!-- After clicking the button open the modal dialog using open/close event binding methods -->
+<button type="button" style="margin-left: 43%" color="primary" class=" w3-blue-gray" [disabled]="check" (click)="openModalDialog()">Select a Role</button>
 <div class="backdrop" [ngStyle]="{'display':display}"></div>
 
 <!-- modal -->
@@ -19,6 +34,7 @@
       <div class="modal-body">
 
           <form [formGroup]="optionalForm" (ngSubmit) = "senddata()" >
+              
               <div class="form-group">
                   <input type =radio name="role" value="speaker" formControlName="role">speaker<br>
                   <input type =radio name="role" value="sponsor" formControlName="role">sponsor<br>
@@ -43,40 +59,13 @@
                 <label for= "educational_details">Educational or Additional Details</label>
                 <input type =text class="form-control" id="educational_details" formControlName="educational_details" style="height:100%; float:right">
             </div> 
-
-             <!--modal-footer--> 
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success w3-blue-gray" style="float:left" (click)="closeModalDialog()">save</button>
-            </div>
-            
-       </form>
+              <!--modal-footer -->
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-success w3-blue-gray" (click)="closeModalDialog()">save</button>
+              </div>
+            </form>
         
       </div>
-              
-
-    </div>
+      </div>
   </div>
 </div>
-
-<div class="w3-container">
-  <div class="w3-panel w3-sand w3-xlarge w3-serif w3-khaki">
-    <h3>Upcoming Events</h3>
-   </div>
-   <div class="row">
-   <div *ngFor="let event of eventnames" >
-     <div class="column">
-          <div class="w3-card-4" style="border-radius: 10px;background-color:rgba(50, 74, 88, 0.925);width:200px; margin-left: 10px;">
-              <div class="w3-container w3-center w3-hover-shadow ">
-                <!-- <h3>Event</h3>-->
-                <h3 style="color:orange;margin-top:5px;font-weight:bold">{{event.eventname}}</h3>
-                <br>
-                <label class="w3-button" style="background-color:rgb(255, 255, 255)"  [routerLink]="['/dashboard/underconstructed_event_description',event.eventid]" >View</label>
-                
-                      <br><br>
-                       
-                </div>
-          </div>
-      </div>
-    </div>
-    </div> 
-</div>     
