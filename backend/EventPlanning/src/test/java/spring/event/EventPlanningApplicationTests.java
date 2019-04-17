@@ -11,6 +11,7 @@ public class EventPlanningApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		System.out.println("................hello world********************");
 	}
 
 }
