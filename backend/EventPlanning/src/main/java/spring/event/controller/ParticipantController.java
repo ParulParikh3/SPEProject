@@ -105,7 +105,7 @@ public class ParticipantController {
 		Event event=eventrepository.findByEventid(id.getEventid());
 		if(userevent!=null && userevent.getStatus().equals("approved")) 
 		{
-			usereventrepository.deleteById(id); // delete entry from user_eventlink table
+			usereventrepository.delete(id); // delete entry from user_eventlink table
 		   if(event.getWaiting_count()!=0)    // case where there are participants in waiting list
 		   {
 			   int wait_count=event.getWaiting_count()-1;  //update wait_count in event table since on waiting list participant get approved
@@ -139,9 +139,9 @@ public class ParticipantController {
 		
 		else if(userevent!=null && userevent.getStatus().equals("waiting"))
 		{
-			usereventrepository.deleteById(id);  // deleting entry fron user_eventlink table 
+			usereventrepository.delete(id);  // deleting entry fron user_eventlink table 
 			Waiting_List waitlist=waitingrepository.findByUserandEventid(id.getUserid(),id.getEventid());
-			waitingrepository.deleteById(waitlist.getWaiting_id()); // deleting entry from waiting_list also
+			waitingrepository.delete(waitlist.getWaiting_id()); // deleting entry from waiting_list also
 			event.setWaiting_count(event.getWaiting_count()-1); // updating waiting_count in event table
 			eventrepository.save(event);
 		return "withdrawn successfully";

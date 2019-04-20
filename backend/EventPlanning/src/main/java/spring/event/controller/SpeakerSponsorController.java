@@ -223,7 +223,7 @@ public class SpeakerSponsorController {
 	public String CheckExistingUser(@PathVariable("userid") long userid ){
 		
 		
-		if(optionaldetail.findById(userid)!=null) { 
+		if(optionaldetail.findByUserid(userid)!=null) { 
 			return failure;
 		}
 		else {
@@ -257,7 +257,7 @@ public class SpeakerSponsorController {
 		}
 		
 		
-		if(optionaldetail.findById(user.getUserid())!=null && user.getEventid()==0) {
+		if(optionaldetail.findByUserid(user.getUserid())!=null && user.getEventid()==0) {
 			return new ResponseEntity<>(failure,HttpStatus.OK);
 		}
 		else {
