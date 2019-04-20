@@ -13,6 +13,9 @@ services:
       - /data/mysql
   spring-boot-jpa-app:
     image: spring-boot-jpa-image
+     build:
+      context: ./
+      dockerfile: Dockerfile
     depends_on:
       - mysql-docker-container
     ports:
