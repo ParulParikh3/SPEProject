@@ -1,6 +1,6 @@
 FROM java:8-jdk-alpine
 
-COPY ./EventPlanning-0.0.1-SNAPSHOT.jar /usr/app/
+Add backend/EventPlanning/target/EventPlanning-0.0.1-SNAPSHOT.jar /usr/app/
 
 WORKDIR /usr/app
 
