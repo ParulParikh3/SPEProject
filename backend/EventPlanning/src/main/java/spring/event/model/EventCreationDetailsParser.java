@@ -40,7 +40,7 @@ public class EventCreationDetailsParser {
 		this.eventtype = eventtype;
 	}
 
-        public EventCreationDetailsParser()
+        public EventCreationDetailsParser(CustomType custom)
 	{
 	}
 	private long organizer_id;
