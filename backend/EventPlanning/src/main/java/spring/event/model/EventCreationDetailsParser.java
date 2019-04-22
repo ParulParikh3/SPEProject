@@ -124,7 +124,7 @@ public class EventCreationDetailsParser {
 	public String getLastdate() {
 		return last_date;
 	}
-	public void setLastdate() {
+	public void setLastdate(String last_date) {
 		this.last_date=last_date;
 	}
 	
