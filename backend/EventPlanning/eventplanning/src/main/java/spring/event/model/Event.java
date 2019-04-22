@@ -26,13 +26,13 @@ public class Event implements Comparable<Event> {
 	@Column(name="participantcount")
 	private int participantcount;
 	
-	@Column(name="participant_registered",columnDefinition="INTEGER DEFAULT 0" )
+	@Column(name="participant_registered")
 	private int participant_registered;
 	
 	@Column(name="eventlocation")
 	private String eventlocation;
 	
-	@Column(name="waiting_count",columnDefinition="INTEGER DEFAULT 0")
+	@Column(name="waiting_count")
 	private int waiting_count;
 	
 	@Column(name="register_fee")

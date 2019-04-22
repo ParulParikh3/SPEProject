@@ -6,9 +6,6 @@ import javax.persistence.Column;
 
 public class EventCreationDetailsParser {
 	
-	public EventCreationDetailsParser()
-	{}
-	
 	
 	private String eventname;
 	
@@ -19,66 +16,6 @@ public class EventCreationDetailsParser {
 	private String description;
 	
 	
-	public int getRegister_fee() {
-		return register_fee;
-	}
-
-
-	public void setRegister_fee(int register_fee) {
-		this.register_fee = register_fee;
-	}
-
-
-	public long getOrganizer_id() {
-		return organizer_id;
-	}
-
-
-	public void setOrganizer_id(long organizer_id) {
-		this.organizer_id = organizer_id;
-	}
-
-
-	public String getLast_date() {
-		return last_date;
-	}
-
-
-	public void setLast_date(String last_date) {
-		this.last_date = last_date;
-	}
-
-
-	public void setEventname(String eventname) {
-		this.eventname = eventname;
-	}
-
-
-	public void setEventdate(String eventdate) {
-		this.eventdate = eventdate;
-	}
-
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-
-	public void setParticipantcount(int participantcount) {
-		this.participantcount = participantcount;
-	}
-
-
-	public void setEventlocation(String eventlocation) {
-		this.eventlocation = eventlocation;
-	}
-
-
-	public void setEventtype(String eventtype) {
-		this.eventtype = eventtype;
-	}
-
-
 	private int participantcount;
 	
 	
@@ -157,17 +94,6 @@ public class EventCreationDetailsParser {
 	public String getLastdate() {
 		return last_date;
 	}
-
-
-	@Override
-	public String toString() {
-		return "EventCreationDetailsParser [eventname=" + eventname + ", eventdate=" + eventdate + ", description="
-				+ description + ", participantcount=" + participantcount + ", eventlocation=" + eventlocation
-				+ ", register_fee=" + register_fee + ", organizer_id=" + organizer_id + ", last_date=" + last_date
-				+ ", eventtype=" + eventtype + "]";
-	}
-	
-	
 	
 	
 }

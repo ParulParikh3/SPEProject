@@ -4,18 +4,6 @@ public class EventRegistrationDetailParser {
 	private long userid;
 	private long eventid;
 	private String role;
-	public void setUserid(long userid) {
-		this.userid = userid;
-	}
-	public void setEventid(long eventid) {
-		this.eventid = eventid;
-	}
-	public void setRole(String role) {
-		this.role = role;
-	}
-	public void setFees(int fees) {
-		this.fees = fees;
-	}
 	private int fees;
 	
 	public EventRegistrationDetailParser(long userid, long eventid, String role, int fees) {

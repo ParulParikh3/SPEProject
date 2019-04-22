@@ -89,7 +89,6 @@ public class EventController {
 			@PostMapping("/saveEvent")
 			public String saveEvent(@RequestBody EventCreationDetailsParser eventform)
 			{
-				System.out.println(eventform);
 				String event_name=eventform.getEventname();
 				if(eventrepository.findByEventname(event_name)!=null) 
 				{
