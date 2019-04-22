@@ -28,7 +28,7 @@ public class EventCreationDetailsParser {
 	
 	public EventCreationDetailsParser(String eventname, String eventdate, String description, int participantcount,
 			String eventlocation, int register_fee, long organizer_id, String last_date, String eventtype) {
-		super();
+		
 		this.eventname = eventname;
 		this.eventdate = eventdate;
 		this.description = description;
