@@ -48,10 +48,14 @@ public class ParticipantController {
 	
 	@Transactional
 	@PostMapping("/register")
-	public String registerParticipant(@RequestBody EventRegistrationDetailParser eventdetail )
+	amountpaid:fee}
+	public String registerParticipant(@RequestBody Map<String,Object> eventdetail )
 	{
-		
-		UserEventEmbedded usereventid=new UserEventEmbedded(eventdetail.getUserid(),eventdetail.getEventid());
+		long userid=Long.parseLong(eventdetail.get("userid").toString());
+		long eventid=Long.parseLong(eventdetail.get("eventid").toString());
+		String role=eventdetail.get("role").toString();
+		int fee=Integer.parseInt(eventdetail.get("amountpaid").toString());
+		UserEventEmbedded usereventid=new UserEventEmbedded(userid,eventid);
 		
 		
 		if(usereventrepository.findByUsereventid(usereventid)!=null) //if userid and eventid present  in user_eventlink table
@@ -68,12 +72,12 @@ public class ParticipantController {
 		else
 		{
 		User_EventLink data;
-        Event et=eventrepository.findByEventid(eventdetail.getEventid()); 
+        Event et=eventrepository.findByEventid(eventid); 
         String status;
 		if((et.getParticipant_registered()+1)<=et.getParticipantcount())
 		{
 			status="approved";
-			data=new User_EventLink(usereventid,eventdetail.getRole(),eventdetail.getFees(),status); 
+			data=new User_EventLink(usereventid,role,fee,status); 
 			usereventrepository.save(data);   //insert data in user_eventlink table
 		int new_count=et.getParticipant_registered()+1; // update participant_registered attribute in event table
 		et.setParticipant_registered(new_count);
@@ -84,7 +88,7 @@ public class ParticipantController {
 			
 		{
 			status="waiting";
-			data=new User_EventLink(usereventid,eventdetail.getRole(),eventdetail.getFees(),status);
+			data=new User_EventLink(usereventid,role,fee,status);
 			usereventrepository.save(data); //insert data in user_eventlink table with status="waiting"
 			Waiting_List wait=new Waiting_List(usereventid.getUserid(),usereventid.getEventid());
 			waitingrepository.save(wait); // insert into waiting_list table
