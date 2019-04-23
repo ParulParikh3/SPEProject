@@ -2,7 +2,7 @@ version: '2.0'
 
 services:
   mysql-docker-container:
-    image: mysql:5.7
+    image: mysql:latest
     
     environment:
       - MYSQL_ROOT_PASSWORD=root123
@@ -23,4 +23,4 @@ services:
       - 3000:3000 
     volumes:
       - /data/spring-boot-app
-    #command: java -jar /usr/app/EventPlanning-0.0.1-SNAPSHOT.jar
+    command: java -jar /usr/app/EventPlanning-0.0.1-SNAPSHOT.jar
