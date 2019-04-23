@@ -87,29 +87,29 @@ public class EventController {
 	
 	//used in organizer module(added by divya)
 			@PostMapping("/saveEvent")
-			public String saveEvent(@RequestBody EventCreationDetailsParser eventform)
+			public String saveEvent(@RequestBody Map<String,Object> eventform)
 			{
-				System.out.println(eventform);
-				String event_name=eventform.getEventname();
+				//System.out.println(eventform);
+				String event_name=eventform.get("eventname");
 				if(eventrepository.findByEventname(event_name)!=null) 
 				{
 					message="event name already exist";
 					return message;
 				}
-				long organizer_id=eventform.getOrganizerid();
+				long organizer_id=Long.parseLong(eventform.get("organizer_id");
 				
-				String eventdate=eventform.getEventdate();
+				String eventdate=eventform.get("eventdate");
 				
-				String description=eventform.getDescription();
-				int participant_count=eventform.getParticipantcount();
+				String description=eventform.get("description");
+				int participant_count=Integer.parseInt(eventform.get("participantcount"));
 				
-				String lastdate=eventform.getLastdate();
+				String lastdate=eventform.get("last_date");
 				
-				String eventlocation=eventform.getEventlocation();
+				String eventlocation=eventform.get("eventlocation");
 				
-				int fees=eventform.getEventfees();
+				int fees=Integer.parseInt(eventform.get("register_fee"));
 				
-				String typeofevent=eventform.getEventtype();
+				String typeofevent=eventform.get("eventtype");
 				
 				Event event =new Event(event_name,eventdate,description,participant_count,eventlocation,fees,"creation",organizer_id,lastdate,typeofevent);
 				eventrepository.save(event);
