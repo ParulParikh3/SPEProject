@@ -96,18 +96,18 @@ public class EventController {
 					message="event name already exist";
 					return message;
 				}
-				long organizer_id=Long.parseLong(eventform.get("organizer_id"));
+				long organizer_id=Long.parseLong(eventform.get("organizer_id").toString());
 				
 				String eventdate=eventform.get("eventdate").toString();
 				
 				String description=eventform.get("description").toString();
-				int participant_count=Integer.parseInt(eventform.get("participantcount"));
+				int participant_count=Integer.parseInt(eventform.get("participantcount").toString());
 				
 				String lastdate=eventform.get("last_date").toString();
 				
 				String eventlocation=eventform.get("eventlocation").toString();
 				
-				int fees=Integer.parseInt(eventform.get("register_fee"));
+				int fees=Integer.parseInt(eventform.get("register_fee").toString());
 				
 				String typeofevent=eventform.get("eventtype").toString();
 				
