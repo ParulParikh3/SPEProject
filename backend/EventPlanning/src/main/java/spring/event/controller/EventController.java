@@ -90,7 +90,7 @@ public class EventController {
 			public String saveEvent(@RequestBody Map<String,Object> eventform)
 			{
 				//System.out.println(eventform);
-				String event_name=eventform.get("eventname");
+				String event_name=eventform.get("eventname").toString();
 				if(eventrepository.findByEventname(event_name)!=null) 
 				{
 					message="event name already exist";
@@ -98,18 +98,18 @@ public class EventController {
 				}
 				long organizer_id=Long.parseLong(eventform.get("organizer_id"));
 				
-				String eventdate=eventform.get("eventdate");
+				String eventdate=eventform.get("eventdate").toString();
 				
-				String description=eventform.get("description");
+				String description=eventform.get("description").toString();
 				int participant_count=Integer.parseInt(eventform.get("participantcount"));
 				
-				String lastdate=eventform.get("last_date");
+				String lastdate=eventform.get("last_date").toString();
 				
-				String eventlocation=eventform.get("eventlocation");
+				String eventlocation=eventform.get("eventlocation").toString();
 				
 				int fees=Integer.parseInt(eventform.get("register_fee"));
 				
-				String typeofevent=eventform.get("eventtype");
+				String typeofevent=eventform.get("eventtype").toString();
 				
 				Event event =new Event(event_name,eventdate,description,participant_count,eventlocation,fees,"creation",organizer_id,lastdate,typeofevent);
 				eventrepository.save(event);
