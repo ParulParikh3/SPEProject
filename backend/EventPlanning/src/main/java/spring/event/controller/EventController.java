@@ -96,7 +96,7 @@ public class EventController {
 					message="event name already exist";
 					return message;
 				}
-				long organizer_id=Long.parseLong(eventform.get("organizer_id");
+				long organizer_id=Long.parseLong(eventform.get("organizer_id"));
 				
 				String eventdate=eventform.get("eventdate");
 				
