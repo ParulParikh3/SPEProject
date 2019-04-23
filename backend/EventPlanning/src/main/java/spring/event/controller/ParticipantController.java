@@ -48,7 +48,6 @@ public class ParticipantController {
 	
 	@Transactional
 	@PostMapping("/register")
-	amountpaid:fee}
 	public String registerParticipant(@RequestBody Map<String,Object> eventdetail )
 	{
 		long userid=Long.parseLong(eventdetail.get("userid").toString());
