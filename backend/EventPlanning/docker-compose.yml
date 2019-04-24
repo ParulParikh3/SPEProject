@@ -2,7 +2,7 @@ version: '2.0'
 
 services:
   mysql-docker-container:
-    image: mysql:latest
+    image: mysql:5.7
     
     environment:
       - MYSQL_ROOT_PASSWORD=root123
