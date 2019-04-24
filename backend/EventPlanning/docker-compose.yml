@@ -13,7 +13,7 @@ services:
     volumes:
       - /data/mysql
   spring-boot-jpa-app:
-    image: spring-boot-jpa-image
+    image: spring-boot-jpa-image:latest
     build:
       context: ./
       dockerfile: Dockerfile
