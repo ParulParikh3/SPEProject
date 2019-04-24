@@ -23,4 +23,5 @@ services:
       - 3000:3000 
     volumes:
       - /data/spring-boot-app
-  
+    command: java -jar /usr/app/EventPlanning-0.0.1-SNAPSHOT.jar
+
