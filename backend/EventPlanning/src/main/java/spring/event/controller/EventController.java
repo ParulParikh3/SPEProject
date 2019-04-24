@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import spring.event.model.Event;
-import spring.event.model.EventCreationDetailsParser;
+
 import spring.event.model.EventParser;
 import spring.event.model.SpeakerSponsorDTO;
 import spring.event.model.UserEventEmbedded;
