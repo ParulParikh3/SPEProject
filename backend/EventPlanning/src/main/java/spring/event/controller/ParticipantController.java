@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import spring.event.model.Event;
-import spring.event.model.EventRegistrationDetailParser;
+
 import spring.event.model.UserEventEmbedded;
 import spring.event.model.User_EventLink;
 import spring.event.model.Waiting_List;
