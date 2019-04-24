@@ -17,8 +17,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    #depends_on:
-    links:
+    depends_on:
       -mysql-docker-container
     ports:
       - 3000:3000 
