@@ -18,7 +18,7 @@ services:
       context: ./
       dockerfile: Dockerfile
     depends_on:
-      -mysql-docker-container
+      - mysql-docker-container
     ports:
       - 3000:3000 
     volumes:
